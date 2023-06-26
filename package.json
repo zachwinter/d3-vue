@@ -1,12 +1,26 @@
 {
-  "name": "d3-vue",
-  "private": true,
-  "version": "0.0.0",
+  "name": "@zach.winter/d3-vue",
+  "version": "1.0.1",
   "type": "module",
+  "description": "Some visualization primitives built with D3 and Vue 3. A work in progress.",
+  "main": "index.js",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/zachwinter/d3-vue.git"
+  },
+  "keywords": [
+    "d3",
+    "vue",
+    "data",
+    "visualization",
+    "dataviz"
+  ],
+  "author": "Zach Winter",
   "scripts": {
     "dev": "vite",
     "build": "vue-tsc && vite build",
-    "preview": "vite preview"
+    "preview": "vite preview",
+    "test": "echo \"Error: no test specified\" && exit 1"
   },
   "dependencies": {
     "d3-array": "^3.2.4",

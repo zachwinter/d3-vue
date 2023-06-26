@@ -6,6 +6,7 @@
 
 <script setup lang="ts">
 import { ZoomTransform, zoomIdentity } from 'd3-zoom';
+import { type Ref, ref, provide } from 'vue'
 
 const components: Ref<any[]> = ref([]);
 const transform: Ref<ZoomTransform> = ref(zoomIdentity);
