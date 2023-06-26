@@ -9,6 +9,7 @@ import { ScaleRecord } from '../../types/D3';
 import { select } from 'd3-selection';
 import { ZoomTransform } from 'd3-zoom';
 import { axisLeft } from 'd3-axis';
+import { type Ref, ref, inject, computed } from 'vue'
 
 const scales = inject('scales') as Ref<ScaleRecord>;
 const transform = inject('transform') as Ref<ZoomTransform>;

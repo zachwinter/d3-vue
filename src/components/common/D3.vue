@@ -13,6 +13,7 @@
 </template>
 
 <script setup lang="ts">
+import { type Ref, ref, inject } from 'vue'
 import AxisX from './AxisX.vue';
 import AxisY from './AxisY.vue';
 import Selection from './Selection.vue';

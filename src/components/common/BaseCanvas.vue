@@ -10,6 +10,7 @@
 
 <script setup lang="ts">
 import { useArtboard } from '../../hooks/Artboard';
+import { type Ref, ref, inject } from 'vue'
 
 defineProps<{ name: string | undefined }>();
 

@@ -15,6 +15,7 @@ import { zoomIdentity } from 'd3-zoom';
 import { ScaleRecord } from '../../types/D3';
 import { pointer } from 'd3-selection';
 import BaseCanvas from './BaseCanvas.vue';
+import { type Ref, ref, inject } from 'vue'
 
 const $emit = defineEmits(['select-start', 'select-end']);
 const viewport = useViewport();
