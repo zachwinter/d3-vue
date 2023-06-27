@@ -1,61 +1,41 @@
 <template>
-  <D3 ref="wrapper" v-bind="$props" @tick="tick" @transform="setTransform">
+  <D3 ref="wrapper" v-bind="$props">
     <slot></slot>
   </D3>
 </template>
 
-<script setup lang="ts">
-import { ZoomTransform } from 'd3-zoom';
+<script setup lang="ts" generic="P extends BarChartProps">
 import { type BarChartProps, BaseBarChartProps } from '../../types';
 import D3 from '../common/D3.vue';
+import { type Ref, ref } from 'vue'
 
 const props = withDefaults(
   defineProps<BarChartProps>(),
   BaseBarChartProps as any
 );
 
-const updateTransform: Function | null = inject('update:transform') as any;
-
-const ctx: Ref<CanvasRenderingContext2D | null> = ref(null);
 const wrapper = ref();
-
-async function setTransform(transform: ZoomTransform) {
-  wrapper.value?.setTransform?.(transform);
-  // syncTick?.(val);
-}
-
-function emitTransform(val: ZoomTransform) {
-  $emit('transform', val);
-  syncTick?.(val);
-}
-
-const exposed = {
-  setTransform,
-  emitTransform,
-};
-
-defineExpose(exposed);
-
-sync?.(exposed);
-
-const $emit = defineEmits(['transform']);
+const ctx: Ref<CanvasRenderingContext2D | null> = ref(null);
 
 watch(
   () => [props.width, props.height, props.dpr],
-  () => rescale()
+  async (size) => {
+    if (!ctx.value) return;
+    await nextTick();
+    ctx.value?.resetTransform();
+    ctx.value?.scale(size[2], size[2]);
+    ctx.value.lineWidth = props.lineWidth;
+    ctx.value.strokeStyle = props.barColor;
+    tick();
+  }
 );
 
-async function rescale(transform = props.transform) {
-  if (!ctx.value) return;
-  await nextTick();
-  ctx.value.resetTransform();
-  ctx.value.scale(props.dpr, props.dpr);
-  ctx.value.fillStyle = props.barColor;
-  emitTransform(transform);
-  tick();
-}
+watch(
+  () => wrapper.value?.transform,
+  () => tick()
+);
 
-async function tick() {
+function tick() {
   const { width, height, lineWidth, data } = props;
   const xScale = wrapper.value.scales.x as any;
   const yScale = wrapper.value.scales.y as any;
@@ -90,6 +70,7 @@ async function tick() {
 
   ctx.value?.fill(path);
 }
+
 
 onMounted(async () => {
   await nextTick();

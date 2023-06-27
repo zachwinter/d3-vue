@@ -45,7 +45,7 @@ export function buildScales(props: BaseProps & BarChartProps): ScaleRecord {
   const xAxisDataType: AxisDataType = xType;
   const yAxisDataType: AxisDataType = yType;
   const xMethod = (xAxisDataType === 'date' ? scaleTime : scaleLinear) as any;
-  const xScale = xMethod(domainX, [lineWidth, props.width - props.padding]);
+  const xScale = xMethod(domainX, [lineWidth, props.width - (props.padding || 0)]);
   const yMethod = (yAxisDataType === 'date' ? scaleTime : scaleLinear) as any;
   const yScale = yMethod(domainY, [
     lineWidth,

@@ -19,11 +19,11 @@ const ctx: Ref<CanvasRenderingContext2D | null> = ref(null);
 
 watch(
   () => [props.width, props.height, props.dpr],
-  async ([width, height, dpr]) => {
+  async (size) => {
     if (!ctx.value) return;
     await nextTick();
     ctx.value?.resetTransform();
-    ctx.value?.scale(dpr, dpr);
+    ctx.value?.scale(size[2], size[2]);
     ctx.value.lineWidth = props.lineWidth;
     ctx.value.strokeStyle = props.barColor;
     tick();
@@ -46,7 +46,7 @@ function tick() {
 
   const path = new Path2D();
 
-  dataset.forEach?.((coords: [number, number], i) => {
+  dataset.forEach?.((coords: [number, number], i:number) => {
     if (finalized) return;
 
     const x = xScale?.(coords[0]) || null;

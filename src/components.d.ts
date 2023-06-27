@@ -7,17 +7,15 @@ export {}
 
 declare module 'vue' {
   export interface GlobalComponents {
-    AxisX: typeof import('./components/common/AxisX.vue')['default'];
-    AxisY: typeof import('./components/common/AxisY.vue')['default'];
-    BarChart: typeof import('./components/charts/BarChart.vue')['default'];
-    BaseCanvas: typeof import('./components/common/BaseCanvas.vue')['default'];
-    Canvas: typeof import('./components/common/Canvas.vue')['default'];
-    D3: typeof import('./components/common/D3.vue')['default'];
-    LineChart: typeof import('./components/charts/LineChart.vue')['default'];
-    RouterLink: typeof import('vue-router')['RouterLink'];
-    RouterView: typeof import('vue-router')['RouterView'];
-    Selection: typeof import('./components/common/Selection.vue')['default'];
-    Synced: typeof import('./components/common/Synced.vue')['default'];
-    SyncedCharts: typeof import('./components/common/SyncedCharts.vue')['default'];
+    AxisX: typeof import('./components/common/AxisX.vue')['default']
+    AxisY: typeof import('./components/common/AxisY.vue')['default']
+    BarChart: typeof import('./components/charts/BarChart.vue')['default']
+    BaseCanvas: typeof import('./components/common/BaseCanvas.vue')['default']
+    D3: typeof import('./components/common/D3.vue')['default']
+    LineChart: typeof import('./components/charts/LineChart.vue')['default']
+    RouterLink: typeof import('vue-router')['RouterLink']
+    RouterView: typeof import('vue-router')['RouterView']
+    Selection: typeof import('./components/common/Selection.vue')['default']
+    SyncedCharts: typeof import('./components/common/SyncedCharts.vue')['default']
   }
 }

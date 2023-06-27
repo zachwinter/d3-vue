@@ -1,4 +1,4 @@
-import type { ComputedRef, Ref } from 'vue';
+import type { Ref } from 'vue';
 import { acceptHMRUpdate, defineStore } from 'pinia';
 
 export const MOBILE_BREAKPOINT: number = 320;

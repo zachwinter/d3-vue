@@ -23,9 +23,10 @@ export function initZoom({
   let raf = 0;
 
   function onZoom(e: any) {
+    const self:any = (this as any)
     cancelAnimationFrame(raf);
     if (tweening.value) return;
-    raf = requestAnimationFrame(zoomed.bind(this, e));
+    raf = requestAnimationFrame(zoomed.bind(self, e));
   }
 
   zoomInstance.value?.on('zoom', onZoom);
@@ -35,6 +36,8 @@ export function initZoom({
     .call(zoomInstance.value as any) as any;
 
   function zoomed(event: any) {
+    const self: any = this as any;
+
     if (
       tweening.value ||
       !zoomInstance.value ||
@@ -53,7 +56,7 @@ export function initZoom({
         -sourceEvent.deltaX / 3 / t.k,
         0
       );
-      setTransform(zoomTransform(this));
+      setTransform(zoomTransform(self));
       return sourceEvent.preventDefault();
     }
 
@@ -61,13 +64,13 @@ export function initZoom({
       const delta = -sourceEvent.deltaY * (sourceEvent.deltaMode ? 120 : 1);
       const k = t.k * Math.pow(2, delta / 500);
       zoomInstance.value.scaleTo($element, k);
-      const t2 = zoomTransform(this); // reaccess the transform so that the zoom's extents apply
+      const t2 = zoomTransform(self); // reaccess the transform so that the zoom's extents apply
       const p = pointer(event, event.sourceEvent.target); // We're going to shift by a point
       const w = scales.value.x.range()[1]; // My scales reference
       const dw = w / t2.k - w / t.k; // The change in width
       const x = dw / 2 - dw * (p[0] / w);
       zoomInstance.value.translateBy($element, -x, 0);
-      setTransform(zoomTransform(this));
+      setTransform(zoomTransform(self));
       return sourceEvent.preventDefault();
     }
   }
