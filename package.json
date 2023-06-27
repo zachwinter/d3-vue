@@ -1,6 +1,6 @@
 {
   "name": "@zach.winter/d3-vue",
-  "version": "1.0.7",
+  "version": "1.0.8",
   "type": "module",
   "description": "Some visualization primitives built with D3 and Vue 3. A work in progress.",
   "main": "index.js",
